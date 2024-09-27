@@ -280,7 +280,10 @@ strip_options:
 install-strip: build strip_options install
 
 install: build
+	rm -rf $(DESTDIR)
 	mkdir -p $(DESTDIR)$(PREFIX)${includedir}
+	mkdir -p $(DESTDIR)${libdir}
+	mkdir -p $(DESTDIR)${man1dir}
 	$(INSTALL_DATA) ${INSTALL_OPTS} ${MQTTLIB_C_TARGET} $(DESTDIR)${libdir}
 	$(INSTALL_DATA) ${INSTALL_OPTS} ${MQTTLIB_CS_TARGET} $(DESTDIR)${libdir}
 	$(INSTALL_DATA) ${INSTALL_OPTS} ${MQTTLIB_A_TARGET} $(DESTDIR)${libdir}
@@ -290,7 +293,6 @@ install: build
 	$(INSTALL_PROGRAM) ${INSTALL_OPTS} ${PAHO_C_SUB_TARGET} $(DESTDIR)${bindir}
 	$(INSTALL_PROGRAM) ${INSTALL_OPTS} ${PAHO_CS_PUB_TARGET} $(DESTDIR)${bindir}
 	$(INSTALL_PROGRAM) ${INSTALL_OPTS} ${PAHO_CS_SUB_TARGET} $(DESTDIR)${bindir}
-	mkdir -p $(DESTDIR)${libdir}
 	$(LDCONFIG) $(DESTDIR)${libdir}
 	ln -s lib$(MQTTLIB_C).so.${MAJOR_VERSION} $(DESTDIR)${libdir}/lib$(MQTTLIB_C).so
 	ln -s lib$(MQTTLIB_CS).so.${MAJOR_VERSION} $(DESTDIR)${libdir}/lib$(MQTTLIB_CS).so
