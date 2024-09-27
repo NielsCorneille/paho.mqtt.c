@@ -179,7 +179,8 @@ MQTTASYNC_INIT = MQTTAsync_init
 START_GROUP = -Wl,--start-group
 END_GROUP = -Wl,--end-group
 
-GAI_LIB = -lanl
+GAI_LIB =
+#GAI_LIB = -lanl
 EXTRA_LIB = -ldl
 
 LDFLAGS_C += -Wl,-soname,lib$(MQTTLIB_C).so.${MAJOR_VERSION}
@@ -289,6 +290,7 @@ install: build
 	$(INSTALL_PROGRAM) ${INSTALL_OPTS} ${PAHO_C_SUB_TARGET} $(DESTDIR)${bindir}
 	$(INSTALL_PROGRAM) ${INSTALL_OPTS} ${PAHO_CS_PUB_TARGET} $(DESTDIR)${bindir}
 	$(INSTALL_PROGRAM) ${INSTALL_OPTS} ${PAHO_CS_SUB_TARGET} $(DESTDIR)${bindir}
+	mkdir -p $(DESTDIR)${libdir}
 	$(LDCONFIG) $(DESTDIR)${libdir}
 	ln -s lib$(MQTTLIB_C).so.${MAJOR_VERSION} $(DESTDIR)${libdir}/lib$(MQTTLIB_C).so
 	ln -s lib$(MQTTLIB_CS).so.${MAJOR_VERSION} $(DESTDIR)${libdir}/lib$(MQTTLIB_CS).so
